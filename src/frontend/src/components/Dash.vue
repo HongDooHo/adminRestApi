@@ -28,7 +28,7 @@
                 <div class="card">
                     <h1 style="font-size:16px">Recent Data</h1>
                     <!-- DataTable -->
-                    <DataTable :value="donations" class="p-datatable-customers" :rows="10" style="margin-bottom: 20px;" :paginator="true">
+                    <DataTable :value="admins" class="p-datatable-customers" @refreshData="refreshList" :rows="10" style="margin-bottom: 20px;" :paginator="true">
                         <!-- <Column field="user_name" header="UserID" :sortable="true"></Column> -->
                         <Column field="user_email" header="UserEmail" :sortable="true"></Column>
                         <Column field="donation_price" header="Price" :sortable="true"></Column>
@@ -51,10 +51,13 @@
 
 <script>
 import DonationService from '../service/DonationService';
+import http from '../service/http-common';
 
 export default {
+
     data() {
         return {
+            admins: [],
             lineData: {
 				labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
 				datasets: [
@@ -78,11 +81,28 @@ export default {
         }
     },
     donationService: null,
+    methods:{
+        retrieveAdmins() {
+            http
+                .get("/admin/all")
+                .then(response => {
+                    this.admins = response.data;
+                    console.log(this.admins);
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        },
+        refreshList() {
+            this.retrieveAdmins();
+        }
+    },
     created() {
         this.donationService = new DonationService();
     },
     mounted() {
         this.donationService.getDonations().then(data => this.donations = data);
+        this.retrieveAdmins();
     }
 }
 </script>

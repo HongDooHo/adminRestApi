@@ -10,7 +10,7 @@
                     </template>
                 </Toolbar>
 
-                <DataTable ref="dt" :value="donations" class="p-datatable-customers" :rows="10" style="margin-bottom: 20px;" :paginator="true">
+                <DataTable ref="dt" :value="admins" @refreshData="refreshList" class="p-datatable-customers" :rows="10" style="margin-bottom: 20px;" :paginator="true">
                     <Column field="id" header="ID" :sortable="true"></Column>
                     <Column field="admin_email" header="Admin" ></Column>
                     <Column field="user_name" header="UserName" ></Column>
@@ -83,10 +83,12 @@
 
 <script>
 import DonationService from '../service/DonationService';
+import http from "../service/http-common";
 
 export default {
     data() {
 		return {
+			admins: [],
 			products: null,
 			productDialog: false,
 			deleteProductDialog: false,
@@ -101,9 +103,11 @@ export default {
     donationService: null,
     created() {
         this.donationService = new DonationService();
+		this.donationService = new DonationService();
     },
     mounted() {
         this.donationService.getDonations().then(data => this.donations = data);
+		this.retrieveAdmins();
     },
     methods: {
         openNew() {
@@ -121,6 +125,20 @@ export default {
         exportCSV() {
 			this.$refs.dt.exportCSV();
 		},
+		retrieveAdmins() {
+			http
+					.get("/admin/all")
+					.then(response => {
+						this.admins = response.data;
+						console.log(this.admins);
+					})
+					.catch(e => {
+						console.log(e);
+					});
+		},
+		refreshList() {
+			this.retrieveAdmins();
+		}
     }
 }
 </script>

@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,8 +32,8 @@ public class AdminApiLogicService implements CrudInterface<AdminRequest, AdminRe
                 .donationPrice(body.getDonationPrice())
                 .donationPlace(body.getDonationPlace())
                 .donationDate(body.getDonationDate())
-                .createdAt(LocalDateTime.now())
-                .createdBy("SERVER")
+//                .createdAt(LocalDateTime.now())
+//                .createdBy("SERVER")
                 .build();
 
         Admin newAdmin = adminRepository.save(admin);

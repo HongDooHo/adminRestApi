@@ -7,11 +7,13 @@ import Crud from './components/Crud.vue';
 const routes = [
     {
         path: '/',
+        alias: '/admin/all',
         name: 'dash',
         component: Dash
     },
     {
         path: '/crud',
+        alias: '/admin/all',
         name: 'crud',
         component: Crud
     },
