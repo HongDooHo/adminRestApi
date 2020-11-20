@@ -26,6 +26,11 @@ public class AdminController implements CrudInterface<AdminRequest, AdminRespons
     @Autowired
     private AdminRepository adminRepository;
 
+    @GetMapping("/totalPrice")
+    public Integer totalPrice() {
+        return adminRepository.selectTotal();
+    }
+
     @GetMapping("/all")
     public List<Admin> findAll() {
         List<Admin> admins = new ArrayList<>();

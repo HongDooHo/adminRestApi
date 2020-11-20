@@ -5,7 +5,7 @@
                 <div class="card summary">
                     <span class="title">일간 코인</span>
                     <span class="detail">금일 누적 코인</span>
-                    <span class="count visitors">12</span>
+                    <span class="count visitors">{{total}}</span>
                 </div>
             </div>
             <div class="p-col-12 p-lg-4">
@@ -58,6 +58,7 @@ export default {
     data() {
         return {
             admins: [],
+            total: null,
             lineData: {
 				labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
 				datasets: [
@@ -82,6 +83,17 @@ export default {
     },
     donationService: null,
     methods:{
+        totalPrice() {
+            http
+                .get("/admin/totalPrice")
+                .then(response => {
+                    this.total = response.data;
+                    console.log(this.total);
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        },
         retrieveAdmins() {
             http
                 .get("/admin/all")
@@ -103,6 +115,7 @@ export default {
     mounted() {
         this.donationService.getDonations().then(data => this.donations = data);
         this.retrieveAdmins();
+        this.totalPrice();
     }
 }
 </script>
