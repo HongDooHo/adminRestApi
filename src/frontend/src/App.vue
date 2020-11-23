@@ -6,7 +6,8 @@
             <div :class="sidebarClass" @click="onSidebarClick" v-show="isSidebarVisible()">
                 <div class="layout-logo">
                     <router-link to="/">
-                        <img alt="Logo" :src="logo" />
+<!--                        <img alt="Logo" :src="logo" />-->
+                        <span style="color: white; font-size: large">CHANGE</span>
                     </router-link>
                 </div>
 

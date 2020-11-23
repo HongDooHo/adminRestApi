@@ -67,6 +67,7 @@ import ToggleButton from 'primevue/togglebutton';
 import Tree from 'primevue/tree';
 import TreeTable from 'primevue/treetable';
 import TriStateCheckbox from 'primevue/tristatecheckbox';
+// import VueMoment from 'vue-moment'
 
 import CodeHighlight from './AppCodeHighlight';
 
@@ -93,6 +94,7 @@ app.config.globalProperties.$primevue = reactive({ ripple: true });
 
 app.use(ToastService);
 app.use(router);
+// app.use(VueMoment);
 
 app.directive('tooltip', Tooltip);
 app.directive('ripple', Ripple);
@@ -160,5 +162,6 @@ app.component('ToggleButton', ToggleButton);
 app.component('Tree', Tree);
 app.component('TreeTable', TreeTable);
 app.component('TriStateCheckbox', TriStateCheckbox);
+// app.component('VueMoment', VueMoment);
 
 app.mount('#app');

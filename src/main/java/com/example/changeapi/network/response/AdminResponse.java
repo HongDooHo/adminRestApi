@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -25,7 +26,7 @@ public class AdminResponse {
 
     private String donationPlace;
 
-    private LocalDateTime donationDate;
+    private LocalDate donationDate;
 
     private LocalDateTime createdAt;
 

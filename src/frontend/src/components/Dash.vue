@@ -12,14 +12,14 @@
                 <div class="card summary">
                     <span class="title">주간 코인</span>
                     <span class="detail">주간 누적 코인</span>
-                    <span class="count purchases">333</span>
+                    <span class="count purchases">{{todayT}}</span>
                 </div>
             </div>
             <div class="p-col-12 p-lg-4">
                 <div class="card summary">
                     <span class="title">목표 달성률</span>
                     <span class="detail">해당 목표 달성률</span>
-                    <span class="count revenue">100%</span>
+                    <span class="count revenue">{{total/5000*100}}%</span>
                 </div>
             </div>
         </div>
@@ -59,6 +59,7 @@ export default {
         return {
             admins: [],
             total: null,
+            todayT: null,
             lineData: {
 				labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
 				datasets: [
@@ -94,6 +95,17 @@ export default {
                     console.log(e);
                 });
         },
+        todayTotal() {
+            http
+                .get("/admin/todayTotal")
+                .then(res => {
+                    this.todayT = res.data;
+                    console.log(this.todayT);
+                })
+            .catch((e) => {
+                console.log(e);
+            })
+        },
         retrieveAdmins() {
             http
                 .get("/admin/all")
@@ -116,6 +128,7 @@ export default {
         this.donationService.getDonations().then(data => this.donations = data);
         this.retrieveAdmins();
         this.totalPrice();
+        this.todayTotal();
     }
 }
 </script>

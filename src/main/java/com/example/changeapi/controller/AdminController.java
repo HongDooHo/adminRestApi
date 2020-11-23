@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,22 @@ public class AdminController implements CrudInterface<AdminRequest, AdminRespons
     @GetMapping("/totalPrice")
     public Integer totalPrice() {
         return adminRepository.selectTotal();
+    }
+
+    @GetMapping("/todayTotal")
+    public Integer todayTotal() {
+        List<Integer> prices = new ArrayList<>();
+
+        adminRepository.findAll().forEach(e -> {
+            if(e.getDonationDate()==LocalDate.now()){
+                prices.add(e.getDonationPrice());
+                System.out.println("Success!!");
+            }
+        });
+
+        Integer sum = prices.stream().mapToInt(Integer::intValue).sum();
+        System.out.println(sum);
+        return sum;
     }
 
     @GetMapping("/all")
