@@ -104,7 +104,6 @@ export default {
     donationService: null,
     created() {
         this.donationService = new DonationService();
-		this.donationService = new DonationService();
     },
     mounted() {
         this.donationService.getDonations().then(data => this.donations = data);
@@ -140,46 +139,46 @@ export default {
 		refreshList() {
 			this.retrieveAdmins();
 		},
-		// submitForm() {
-		// 	/*http
-		// 		.post("/admin", this.form)
-		// 		.then((req) => {
-		// 			console.log(req);
-		// 			console.log("success")
-		// 		})
-		// 		.catch((err) => {
-		// 			console.log(err);
-		// 		})
-        //         .finally(() => {
-        //             this.form.user_name = '';
-        //             this.form.user_email = '';
-        //             this.form.donation_place = '';
-        //             this.form.donation_price = null;
-        //             this.form.donation_date = null;
-        //
-        //             this.productDialog = false;
-        //         })*/
-		// 	/*axios.post('/admin', {
-        //         admin_email: 'admin@naver.com',
-        //         user_name: '김정호',
-        //         user_email: 'kjhkjh@gmail.com',
-        //         donation_price: 300,
-        //         donation_place: '서울시 구파발',
-        //         donation_date: '2020-11-25 11:22:11',
-        //     })
-        //     .then(res => console.log(res))
-        //     .finally(() => {
-        //         this.form.user_name = '';
-        //         this.form.user_email = '';
-        //         this.form.donation_place = '';
-        //         this.form.donation_price = null;
-        //         this.form.donation_date = null;
-        //
-        //         this.productDialog = false;
-        //     })*/
-        //
-        //
-		// }
+		submitForm() {
+			http
+				.post("/admin", this.form, header)
+				.then((req) => {
+					console.log(req);
+					console.log("success")
+				})
+				.catch((err) => {
+					console.log(err);
+				})
+                .finally(() => {
+                    this.form.user_name = '';
+                    this.form.user_email = '';
+                    this.form.donation_place = '';
+                    this.form.donation_price = null;
+                    this.form.donation_date = null;
+
+                    this.productDialog = false;
+                })
+			/*axios.post('/admin', {
+                admin_email: 'admin@naver.com',
+                user_name: '김정호',
+                user_email: 'kjhkjh@gmail.com',
+                donation_price: 300,
+                donation_place: '서울시 구파발',
+                donation_date: '2020-11-25 11:22:11',
+            })
+            .then(res => console.log(res))
+            .finally(() => {
+                this.form.user_name = '';
+                this.form.user_email = '';
+                this.form.donation_place = '';
+                this.form.donation_price = null;
+                this.form.donation_date = null;
+
+                this.productDialog = false;
+            })*/
+
+
+		}
     }
 }
 </script>
